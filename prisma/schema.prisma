@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 后台用户（V2 只有管理员，V3 扩展会员角色）
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("admin") // admin | member (V3)
+  createdAt    DateTime @default(now())
+}
+
+// 博客文章
+model Post {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  description String   @default("")
+  content     String // Markdown/MDX 正文
+  tags        String   @default("") // 逗号分隔：Next.js,React
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 项目作品
+model Project {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  description String   @default("")
+  content     String   @default("") // Markdown 详情长文
+  techStack   String   @default("") // 逗号分隔
+  demoUrl     String?
+  sourceUrl   String?
+  featured    Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+// 产品（电子书 / 课程）
+model Product {
+  id            Int      @id @default(autoincrement())
+  slug          String   @unique
+  title         String
+  type          String   @default("course") // ebook | course
+  price         Float
+  originalPrice Float?
+  description   String   @default("")
+  features      String   @default("") // 换行分隔的卖点清单
+  coverEmoji    String   @default("📘")
+  sortOrder     Int      @default(0)
+  updatedAt     DateTime @updatedAt
+}

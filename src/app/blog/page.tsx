@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllPosts } from "@/lib/blog";
+import { getPosts } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -8,8 +8,10 @@ export const metadata: Metadata = {
   description: "技术文章与开发心得",
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export const revalidate = 60; // ISR：后台发布/修改文章后 1 分钟内前台自动更新
+
+export default async function BlogPage() {
+  const posts = await getPosts();
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">

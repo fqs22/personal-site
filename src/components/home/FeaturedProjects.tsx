@@ -1,9 +1,9 @@
 import Link from "next/link";
 import ProjectCard from "@/components/shared/ProjectCard";
-import { getFeaturedProjects } from "@/data/projects";
+import { getFeaturedProjects } from "@/lib/content";
 
-export default function FeaturedProjects() {
-  const featured = getFeaturedProjects(3);
+export default async function FeaturedProjects() {
+  const featured = await getFeaturedProjects(3);
 
   return (
     <section className="bg-gray-50 py-20 dark:bg-gray-900/50">

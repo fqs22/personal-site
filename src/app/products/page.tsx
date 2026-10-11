@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { products, productTypeLabel } from "@/data/products";
+import { getProducts } from "@/lib/content";
+import { productTypeLabel } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "产品",
   description: "电子书与视频课程——我沉淀的知识产品",
 };
 
-export default function ProductsPage() {
+export const revalidate = 60; // ISR
+
+export default async function ProductsPage() {
+  const products = await getProducts();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50">产品</h1>

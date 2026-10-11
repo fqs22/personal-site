@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import ProjectCard from "@/components/shared/ProjectCard";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "项目",
   description: "我开发过的开源项目与作品集",
 };
 
-export default function ProjectsPage() {
+export const revalidate = 60; // ISR
+
+export default async function ProjectsPage() {
+  const projects = await getProjects();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-50">项目</h1>
