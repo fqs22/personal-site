@@ -35,6 +35,12 @@ export default function Footer() {
             >
               联系我
             </Link>
+            <Link
+              href="/login"
+              className="text-gray-300 transition-colors hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400"
+            >
+              管理
+            </Link>
           </div>
         </div>
         <p className="mt-8 text-center text-xs text-gray-400 dark:text-gray-500">

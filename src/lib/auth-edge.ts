@@ -28,11 +28,13 @@ export async function verifyTokenEdge(token: string): Promise<boolean> {
       false,
       ["verify"],
     );
+    // 注意：signToken 是对 base64url 字符串本身做 HMAC，
+    // 所以这里验证的数据也必须是该字符串的 UTF-8 字节（而非解码后的内容）
     const valid = await crypto.subtle.verify(
       "HMAC",
       key,
       base64urlToBytes(sig),
-      base64urlToBytes(body),
+      encoder.encode(body),
     );
     if (!valid) return false;
     const payload = JSON.parse(new TextDecoder().decode(base64urlToBytes(body)));
