@@ -2,9 +2,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// 生产（Vercel + Neon）使用 PostgreSQL；
+// DATABASE_URL 用 Neon 的 pooled 连接串，DIRECT_URL 用直连串（供迁移使用）
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // 后台用户（V2 只有管理员，V3 扩展会员角色）

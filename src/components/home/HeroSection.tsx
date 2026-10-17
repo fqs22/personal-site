@@ -11,7 +11,7 @@ export default function HeroSection() {
         className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-blue-50 via-transparent to-transparent dark:from-blue-950/40"
       />
       <div className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 sm:py-28">
-        <div className="relative mx-auto mb-8 h-28 w-28 overflow-hidden rounded-full ring-4 ring-blue-100 dark:ring-gray-800">
+        <div className="relative mx-auto mb-8 h-36 w-36 overflow-hidden rounded-full ring-4 ring-blue-100 dark:ring-gray-800 sm:h-40 sm:w-40">
           <Avatar />
         </div>
         <p className="animate-fade-in mb-4 text-sm font-medium tracking-widest text-blue-600 dark:text-blue-400">
