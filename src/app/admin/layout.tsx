@@ -13,6 +13,7 @@ const menu = [
   { href: "/admin/posts", label: "文章管理", icon: "📝" },
   { href: "/admin/projects", label: "项目管理", icon: "🛠️" },
   { href: "/admin/products", label: "产品管理", icon: "💰" },
+  { href: "/admin/settings", label: "账号设置", icon: "⚙️" },
 ];
 
 export default async function AdminLayout({

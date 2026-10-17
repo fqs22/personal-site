@@ -41,6 +41,30 @@ export async function logoutAction() {
   redirect("/login");
 }
 
+/** 修改当前登录账号的密码 */
+export async function changePasswordAction(formData: FormData) {
+  const user = await assertAdmin();
+  const currentPassword = String(formData.get("currentPassword") ?? "");
+  const newPassword = String(formData.get("newPassword") ?? "");
+  const confirmPassword = String(formData.get("confirmPassword") ?? "");
+
+  if (!currentPassword || !newPassword) redirect("/admin/settings?error=missing");
+  if (newPassword !== confirmPassword) redirect("/admin/settings?error=mismatch");
+  if (newPassword.length < 8) redirect("/admin/settings?error=weak");
+  if (newPassword === currentPassword) redirect("/admin/settings?error=same");
+
+  const record = await prisma.user.findUnique({ where: { id: user.id } });
+  if (!record || !(await bcrypt.compare(currentPassword, record.passwordHash))) {
+    redirect("/admin/settings?error=wrong");
+  }
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { passwordHash: await bcrypt.hash(newPassword, 10) },
+  });
+  redirect("/admin/settings?saved=1");
+}
+
 /* ============ 工具 ============ */
 
 async function assertAdmin() {
