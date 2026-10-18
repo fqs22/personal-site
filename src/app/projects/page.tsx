@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProjectCard from "@/components/shared/ProjectCard";
+import Reveal from "@/components/shared/Reveal";
 import { getProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -19,8 +20,10 @@ export default async function ProjectsPage() {
         共 {projects.length} 个项目，点击卡片查看详情
       </p>
       <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+        {projects.map((project, i) => (
+          <Reveal key={project.slug} delay={i * 60} className="h-full">
+            <ProjectCard project={project} />
+          </Reveal>
         ))}
       </div>
     </div>

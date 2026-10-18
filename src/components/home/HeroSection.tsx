@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Avatar from "@/components/shared/Avatar";
+import Typewriter from "@/components/shared/Typewriter";
 import { personalInfo } from "@/data/personal";
 
 export default function HeroSection() {
+  const roles = personalInfo.title.split(" · ").filter(Boolean);
+
   return (
     <section className="relative overflow-hidden">
       {/* 背景装饰 */}
@@ -21,7 +24,7 @@ export default function HeroSection() {
           {personalInfo.name}
         </h1>
         <p className="animate-fade-in mt-4 text-xl font-medium text-gray-700 sm:text-2xl dark:text-gray-300">
-          {personalInfo.title}
+          <Typewriter phrases={roles} />
         </p>
         <p className="animate-fade-in mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-500 sm:text-lg dark:text-gray-400">
           {personalInfo.tagline}

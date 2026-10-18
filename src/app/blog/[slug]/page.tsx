@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import { getPostBySlug, getPosts } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
+import ReadingProgress from "@/components/shared/ReadingProgress";
 
 export const revalidate = 60; // ISR
 
@@ -41,6 +42,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <ReadingProgress />
       <Link
         href="/blog"
         className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
