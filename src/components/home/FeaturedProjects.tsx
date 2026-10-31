@@ -3,7 +3,7 @@ import ProjectCard from "@/components/shared/ProjectCard";
 import { getFeaturedProjects } from "@/lib/content";
 
 export default async function FeaturedProjects() {
-  const featured = await getFeaturedProjects(3);
+  const featured = await getFeaturedProjects(4);
 
   return (
     <section className="bg-gray-50 py-20 dark:bg-gray-900/50">
@@ -24,7 +24,7 @@ export default async function FeaturedProjects() {
             查看全部 →
           </Link>
         </div>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {featured.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
